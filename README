@@ -1,0 +1,65 @@
+ActiveComponent
+===============
+
+Active Component introduces components into your Rails presentation layer.
+The use of components improves consistency and development speed through reuse and a new way of view code organization.
+Components are plain Ruby classes that are able to render themselves using a to_html method.
+Active Component provides several means that make it easy to write and use components.
+
+
+Example
+=======
+
+**Active Component Template:**
+
+div 'kpi-report', :content => [
+
+  heading_with_label("in #{ Time.now.year }", "Group", 'group'),
+
+  report_table(@coreprocesses,
+    :headers  => ["Core Processes"] + @companies.collect {|company| company.name},
+    :cols     => [:name] + @companies.collect {|company| 
+      proc {|cp| progress_chart(cp, :reporting_company_id => company.id, :chart_type => :boxes)}
+    }
+  )
+  
+]
+
+Each method represents a component.
+
+
+**Comparision: Same Template in ERB:**
+
+<div class="kpi_report">
+  <h1 class="content_header">
+    <span class="content_header_text">
+      <span class="label group_label">Group</span> 
+      <%= title("Umsetzungsstand der Ziele") %> 
+      in <%= Time.now.year %> <%= help_text %></span>
+  </h1>
+  <div class="content">
+    <div class="sub_content">
+      <table cellspacing="0">
+        <thead>
+          <tr>
+            <td width="80%">Core Processes</td>
+            <% @companies.each do |t| %>
+              <td><%= t.name %></td>
+            <% end %>
+          </tr>
+        </thead>
+        <% @coreprocesses.each do |cp| %>
+        <tr class="line">
+          <td class="small_name_column"><%= cp.name %></td>
+          <% @companies.each do |t| %>
+            <td class="small_indicator_column"><%= scale_helper(cp, true, t.id, Time.now.year, groupwide) %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+Copyright (c) 2010 [name of plugin creator], released under the MIT license
