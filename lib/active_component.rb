@@ -169,16 +169,3 @@ require 'active_component/components/heading'
 require 'active_component/components/inline_tag'
 require 'active_component/components/section'
 require 'active_component/components/table'
-
-# Load shorthand helpers
-# ActiveComponent.class_eval do
-#   for component in ActiveComponent::Base.subclasses
-#     eval <<-EOM
-#       def #{component.to_s.underscore}(*args, &block)
-#         #{component.constantize}.new(*args, &block)
-#       end
-#     EOM
-#   end
-# end
-
-

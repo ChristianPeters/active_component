@@ -1,3 +1,5 @@
+require 'haml/template'
+
 module ActiveComponent
   # The module for all global ActiveComponent configurations
   module Config

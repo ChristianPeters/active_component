@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module ActiveComponent
   class Base
     include ActiveComponent  

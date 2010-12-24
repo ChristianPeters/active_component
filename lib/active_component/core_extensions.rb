@@ -69,11 +69,10 @@ module Enumerable
   
 end
 
+require 'action_view'
 # FIXME: There should be a better way to provide the module to ActionView.
-module ActionView
-  class Base
-    include ActiveComponent
-  end
+class ActionView::Base
+  include ActiveComponent
 end
 
 module ActiveSupport::CoreExtensions::Hash::ReverseMerge
