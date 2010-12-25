@@ -65,11 +65,7 @@ module ActiveComponent
       # All args in args_hash that have not been used for setting an instance variable become attributes.
       @attributes.set_defaults!(args_hash)
       # The class attribute will contain the component title and class_name (unless component is a html tag wrapper)
-      unless is_html_tag_wrapper?
-        @attributes[:class]   = (html_class + [@attributes[:class]].flatten).compact.uniq
-      else
-        @attributes[:class] ||= @title.hyphenize unless @title.blank?
-      end
+      @attributes[:class] = (html_class + [@attributes[:class]].flatten).compact.uniq
     end
 
     def content=(cont)
@@ -88,7 +84,7 @@ module ActiveComponent
     def html_class
       class_arr = []
       class_arr << @title.hyphenize unless @title.blank?
-      class_arr << class_name
+      class_arr << class_name unless is_html_tag_wrapper?
       class_arr.uniq
     end
 
