@@ -2,13 +2,13 @@ require 'forwardable'
 
 module ActiveComponent
   class Base
-    include ActiveComponent  
+    include ActiveComponent
     include Haml::Helpers
     include Enumerable
     extend ::Forwardable
-    
+
     attr_accessor :attributes, :title
-    
+
     # Initializes component by fetching arguments of a flexible method call as well as initializing the node and buffer
     # *Example*
     #     def initialize(*args, &content_block)
@@ -18,15 +18,15 @@ module ActiveComponent
     #       @attributes ||= {:class => @title}
     #     end
     #
-    # Arguments may be non-hash objects with certain order. 
+    # Arguments may be non-hash objects with certain order.
     # Then, the arguments will be set to instance variables with the var_names entry at the same index.
     # Though, it is always possible use a hash for assigning parameters to keywords (e.g. :title => "Blumenkübel");
     # As always, parenthesis can be omitted for this last hash.
-    # 
-    # The list of variable names will be iterated in order. 
+    #
+    # The list of variable names will be iterated in order.
     # The first element becomes an instance variable that gets the block assigned (if passed along).
     # If the list of variable names iteration is complete, remaining key-value pairs of the Hash part of the arguments list are merged into @attributes.
-    # 
+    #
     # Thus, all of the following signatures are legal for the **sender of fetch_args**:
     # *Example 1*
     #     new("content", "title", :class => "api")
@@ -41,10 +41,10 @@ module ActiveComponent
     # @param var_names [Array<Symbol>] Ordered list of instance variables to fetch. First one gets assigned to block (if given).
     # @param &content_block [#to_proc] The given block; will be assigned to variable named first in +var_names+.
     def init_component(args, var_names = [:content, :title, :attributes], &content_block)
-      
+
       init_node
       init_buffer
-      
+
       # Fetch arguments
       non_hash_args = []
       args_hash     = {}
@@ -55,7 +55,7 @@ module ActiveComponent
 
       # var_names.first is set to block if block given
       send(var_names.shift.to_s + "=", content_block.call) if content_block
-      
+
       for var_name in var_names
         # Each value is extracted from args_hash, if resp. var_name present, otherwise the next non-hash argument is taken
         send(var_name.to_s + "=", args_hash.delete(var_name) || non_hash_args.shift)
@@ -71,7 +71,7 @@ module ActiveComponent
         @attributes[:class] ||= @title.hyphenize unless @title.blank?
       end
     end
-    
+
     def content=(cont)
       @content = cont
       # Add content as a child if it is also a component
@@ -79,39 +79,39 @@ module ActiveComponent
         self << c if c.is_a? ActiveComponent
       end
     end
-    
+
     def content
       # If content is not given yet, return node children
       @content || children
     end
-    
+
     def html_class
       class_arr = []
       class_arr << @title.hyphenize unless @title.blank?
       class_arr << class_name
       class_arr.uniq
     end
-    
+
     def class_name
        self.class.to_s.hyphenize
     end
-    
+
     def to_html
       raise NotImplementedError, "to_html has to be implemented for every component that inherits from ActiveComponent::Base"
     end
-    
+
     def to_s
       to_html
     end
-    
+
     def is_html_tag_wrapper?
       ActiveComponent::HTML5_ELEMENTS.each_value {|category| break true if category.include?(class_name.to_sym)} == true
     end
-    
+
     def self.inherited(component_class)
       def_component_helper(component_class) unless component_class.to_s =~ /#/
     end
-    
+
     def self.def_component_helper(component_class)
       raise ArgumentError, "Anonymous classes are not allowed because a name is needed." if component_class.to_s =~ /#/
       ActiveComponent.class_eval do
@@ -122,20 +122,20 @@ module ActiveComponent
         )
       end
     end
-    
+
     # def self.components
     #   # Strings allow for fastest lookup in method_missing (costly)
     #   subclasses.join(";")
     # end
-    
+
     # def method_missing(method, *args, &block)
-    #   if components.index method.to_s.camelize    
+    #   if components.index method.to_s.camelize
     #     method.to_class_constant.new(*args, &block)
     #   else
     #     super
-    #   end   
+    #   end
     # end
-    
+
     #----------------------------------------
     # NODE METHODS COPIED FROM Tree::TreeNode
     # An own, delegatable Tree Library has to
@@ -143,7 +143,7 @@ module ActiveComponent
     # contained here as they make heavy use
     # of self.
     #----------------------------------------
-    
+
     # Overridden / own methods
     #--------------------
     # Adds the specified child node to the receiver node.
@@ -167,27 +167,27 @@ module ActiveComponent
     def add(child, prepend = false)
       raise ArgumentError, "Attempting to add a nil node" unless child
       raise "Child #{child.node_name} already added!" if @childrenHash.has_key?(child.node_name)
-      
+
       @childrenHash[child.node_name]  = child
       prepend ? @children.unshift(child) : (@children << child)
       raise "Great Scott! I just added a ghost child!" if !(@children.include?(child)) || @children.empty?
       child.parent = self
       child
     end
-    
+
     def prepend(child)
       add(child, true)
     end
-    
+
     # Original Methods
     #--------------------
-    
+
     # node_name of this node.  Expected to be unique within the tree.
     attr_accessor   :node_name
 
     # node_content of this node.  Can be +nil+.
     attr_accessor :node_content
-    
+
     # TODO: was not necessary to provide in Tree::TreeNode. Why here?
     attr_accessor :childrenHash
 
@@ -289,7 +289,7 @@ module ActiveComponent
     # def add(child)
     #   raise ArgumentError, "Attempting to add a nil node" unless child
     #   raise "Child #{child.node_name} already added!" if @childrenHash.has_key?(child.node_name)
-    # 
+    #
     #   @childrenHash[child.node_name]  = child
     #   @children << child
     #   child.parent = self
@@ -367,7 +367,7 @@ module ActiveComponent
     def is_root?
       @parent.nil?
     end
-    
+
     alias :isRoot? :is_root?
 
     # Returns +true+ if the receiver node has any child node.
@@ -903,13 +903,13 @@ module ActiveComponent
     end
 
     protected :parent=, :setAsRoot!, :createDumpRep
-    
-    
+
+
     protected
-    
+
     def buffer
       @haml_buffer.buffer
     end
-  
+
   end
 end

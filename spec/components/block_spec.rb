@@ -4,7 +4,7 @@ describe Block do
   include Haml::Helpers
   include ActiveSupport::CoreExtensions::String::Inflections
   
-  before :all do
+  before :each do
     @content     = "It is better to be quotable than to be honest."
     @title       = "Tom Stoppard on Quotations"
     @tag_type    = :blockquote
@@ -51,7 +51,7 @@ describe Block do
       block = Block.new @title, :cites => "http://www.quotationspage.com/quote/368.html", :content => @content, :class => 'quotes'
       block.content.should    == @content
       block.title.should      == @title
-      block.attributes.should == @attributes
+      block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, 'block', @attributes[:class]]}
     end
     
     context "subclasses" do
@@ -63,7 +63,7 @@ describe Block do
           block.content.should    == @content
           block.title.should      == @title
           block.tag_type.should   == elem
-          block.attributes.should == @attributes
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
         end
         
         it "should set all parameters correctly when given as key value pairs" do
@@ -71,7 +71,7 @@ describe Block do
           block.content.should    == @content
           block.title.should      == @title
           block.tag_type.should   == elem
-          block.attributes.should == @attributes
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
         end
         
         it "should set all parameters correctly when given in a mixed way" do
@@ -79,7 +79,7 @@ describe Block do
           block.content.should    == @content
           block.title.should      == @title
           block.tag_type.should   == elem
-          block.attributes.should == @attributes
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
         end
         
         it "should prioritize content blocks over arguments" do
@@ -96,7 +96,7 @@ describe Block do
           block = elem_class.new @title, :cites => "http://www.quotationspage.com/quote/368.html", :content => @content, :class => 'quotes'
           block.content.should    == @content
           block.title.should      == @title
-          block.attributes.should == @attributes
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
         end
       end
     end
@@ -125,3 +125,4 @@ describe Block do
   end
   
 end
+
