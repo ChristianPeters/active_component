@@ -66,7 +66,7 @@ for elem in ActiveComponent::HEADING_ELEMENTS
   sub_class.class_eval do
     
     def initialize(*args, &block)
-      args.push({:level => self.class.to_s.last.to_i})
+      args << {:level => self.class.to_s.last.to_i}
       super *args, &block
     end
     

@@ -58,9 +58,9 @@ module ActiveComponent
 
       for var_name in var_names
         # Each value is extracted from args_hash, if resp. var_name present, otherwise the next non-hash argument is taken
-        send(var_name.to_s + "=", args_hash.delete(var_name) || non_hash_args.shift)
+        send var_name.to_s + "=", (args_hash.delete(var_name) or non_hash_args.shift)
       end
-
+      
       @attributes ||= {}
       # All args in args_hash that have not been used for setting an instance variable become attributes.
       @attributes.set_defaults!(args_hash)

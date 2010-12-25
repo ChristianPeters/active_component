@@ -42,16 +42,16 @@ class Table < ActiveComponent::Base
   end
   
   private
-  def get_attrs(attrs_collection, index = nil)
-    attrs = attrs_collection[index] || attrs_collection
-    attrs.is_a?(Hash) ? attrs : {}
-  end
-  
-  def get_row_attrs(index = nil)
-    get_attrs(@row_attrs, index)
-  end
-  
-  def get_header_attrs(index = nil)
-    get_attrs(@header_attrs, index)
-  end
+    def get_attrs(attrs_collection, index = nil)
+      attrs = attrs_collection[index] || attrs_collection
+      attrs.is_a?(Hash) ? attrs : {}
+    end
+    
+    def get_row_attrs(index = nil)
+      get_attrs(@row_attrs, index)
+    end
+    
+    def get_header_attrs(index = nil)
+      get_attrs(@header_attrs, index)
+    end
 end

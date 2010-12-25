@@ -29,7 +29,7 @@ for elem in ActiveComponent::EMPTY_ELEMENTS
   sub_class.class_eval do
     
     def initialize(*args)
-      args.push({:tag_type => self.class.to_s.underscore.to_sym})
+      args << {:tag_type => self.class.to_s.underscore.to_sym}
       super *args
     end
     
