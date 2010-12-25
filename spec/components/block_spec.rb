@@ -51,7 +51,7 @@ describe Block do
       block = Block.new @title, :cites => "http://www.quotationspage.com/quote/368.html", :content => @content, :class => 'quotes'
       block.content.should    == @content
       block.title.should      == @title
-      block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, 'block', @attributes[:class]]}
+      block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, 'block', 'quotes']}
     end
     
     context "subclasses" do
@@ -63,7 +63,7 @@ describe Block do
           block.content.should    == @content
           block.title.should      == @title
           block.tag_type.should   == elem
-          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, 'quotes']}
         end
         
         it "should set all parameters correctly when given as key value pairs" do
@@ -71,7 +71,7 @@ describe Block do
           block.content.should    == @content
           block.title.should      == @title
           block.tag_type.should   == elem
-          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, 'quotes']}
         end
         
         it "should set all parameters correctly when given in a mixed way" do
@@ -79,7 +79,7 @@ describe Block do
           block.content.should    == @content
           block.title.should      == @title
           block.tag_type.should   == elem
-          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, 'quotes']}
         end
         
         it "should prioritize content blocks over arguments" do
@@ -96,7 +96,7 @@ describe Block do
           block = elem_class.new @title, :cites => "http://www.quotationspage.com/quote/368.html", :content => @content, :class => 'quotes'
           block.content.should    == @content
           block.title.should      == @title
-          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, @attributes[:class]]}
+          block.attributes.should == {:cites => @attributes[:cites], :class => [@title.hyphenize, 'quotes']}
         end
       end
     end
