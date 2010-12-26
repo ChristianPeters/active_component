@@ -11,47 +11,6 @@ describe Heading do
     @attributes  = {:class => 'news business'}
   end
 
-      
-  # describe "initialize" do
-  #     
-  #   it "should set all parameters correctly when given in order" do
-  #     heading = Heading.new @content, @title, @level, @attributes
-  #     heading.content.should    == @content
-  #     heading.title.should      == @title
-  #     heading.level.should      == @level
-  #     heading.attributes.should == @attributes
-  #   end
-  #   
-  #   it "should set all parameters correctly when given as key value pairs" do
-  #     heading = Heading.new :attributes => @attributes, :title => @title, :content => @content, :level => @level
-  #     heading.content.should    == @content
-  #     heading.title.should      == @title
-  #     heading.level.should      == @level
-  #     heading.attributes.should == @attributes
-  #   end
-  #   
-  #   it "should set all parameters correctly when given in a mixed way" do
-  #     heading = Heading.new @title, @level, :content => @content, :attributes => @attributes
-  #     heading.content.should    == @content
-  #     heading.title.should      == @title
-  #     heading.level.should      == @level
-  #     heading.attributes.should == @attributes
-  #   end
-  #     
-  #   it "should prioritize content headings over arguments" do
-  #     heading = Heading.new(:content => "ignorable") { @content }
-  #     heading.content.call.should == @content
-  #   end
-  #   
-  #   it "should fill @attributes with remaining arguments of the last hash" do
-  #     heading = Heading.new @title, :content => @content, :class => 'news business'
-  #     heading.content.should    == @content
-  #     heading.title.should      == @title
-  #     heading.attributes.should == @attributes
-  #   end
-  #   
-  # end
-  
   describe "siblings_level" do
     
     it "should adopt correct siblings level" do

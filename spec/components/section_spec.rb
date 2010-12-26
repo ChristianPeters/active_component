@@ -25,7 +25,7 @@ describe Section do
   describe "to_html" do
     it "should be able to render nested sections"
 
-    it "should be able to render section subclasses", :focus => true do
+    it "should be able to render section subclasses" do
       b = Blockquote.new(@content, @title, @attributes)
       b.to_html.should == "<blockquote cites='http://www.quotationspage.com/quote/368.html' class='tom-stoppard-on-quotations quotes'>\n  It is better to be quotable than to be honest.\n</blockquote>"
     end
