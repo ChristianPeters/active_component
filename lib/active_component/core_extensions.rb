@@ -75,9 +75,19 @@ class ActionView::Base
   include ActiveComponent
 end
 
-module ActiveSupport::CoreExtensions::Hash::ReverseMerge
-  alias :set_defaults :reverse_merge 
-  alias :set_defaults! :reverse_merge! 
+if defined? ActiveSupport::CoreExtensions::Hash::ReverseMerge
+  # Rails 2
+  module ActiveSupport::CoreExtensions::Hash::ReverseMerge
+    alias :set_defaults :reverse_merge 
+    alias :set_defaults! :reverse_merge! 
+  end
+else
+  # Rails 3
+  require 'active_support/core_ext/hash/reverse_merge'
+  class Hash
+    alias :set_defaults :reverse_merge 
+    alias :set_defaults! :reverse_merge! 
+  end
 end
 
 module Haml::Helpers
