@@ -6,12 +6,14 @@ class Table < ActiveComponent::Base
     init_component(args, [:content, :title, :cols, :headers, :attributes, :row_attrs, :header_attrs, :field_attrs])
 
     # Defaults
-    @title                    ||= content.first.class.to_s.hyphenize.pluralize
+    if @title.nil?
+      @title                    = content.first.class.to_s.hyphenize.pluralize
+      @attributes[:class].to_a.unshift @title
+    end
     if @cols.nil? && content.first.respond_to?(:attributes)
       @cols                     = content.first.attributes.keys
       @headers                ||= @cols.collect {|col| col.to_s.humanize}
     end
-    @attributes[:class]       ||= @title
     @attributes[:cellspacing] ||= 0
     @row_attrs                ||= {}
     @header_attrs             ||= {}
