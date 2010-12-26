@@ -35,7 +35,7 @@ class Section < ActiveComponent::Base
 end
 
 for elem in ActiveComponent::SECTION_ELEMENTS
-  sub_class = Object.const_set(elem.to_s.camelize, Class.new(InlineTag))
+  sub_class = Object.const_set(elem.to_s.camelize, Class.new(Section))
   ActiveComponent::Base.def_component_helper(sub_class)
 
   sub_class.class_eval do
