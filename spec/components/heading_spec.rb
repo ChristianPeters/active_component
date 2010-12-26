@@ -1,8 +1,6 @@
-require "spec/active_component_spec_helper"
 describe Heading do
   include ActiveComponent
   include Haml::Helpers
-  include ActiveSupport::CoreExtensions::String::Inflections
   
   before :all do
     @content     = "Wall Street Retreats in the Face of a Slowdown"

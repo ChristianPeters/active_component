@@ -1,8 +1,6 @@
-require "spec/active_component_spec_helper"
 describe Block do
   include ActiveComponent
   include Haml::Helpers
-  include ActiveSupport::CoreExtensions::String::Inflections
 
   before :each do
     @content     = "It is better to be quotable than to be honest."
