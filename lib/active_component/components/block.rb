@@ -13,18 +13,6 @@ class Block < ActiveComponent::Base
     wrap_contents(@tag_type, content, nil, @attributes)
   end
   
+  def_html_sub_components ActiveComponent::BLOCK_ELEMENTS, self
 end
 
-for elem in ActiveComponent::BLOCK_ELEMENTS
-  sub_class = Object.const_set(elem.to_s.camelize, Class.new(Block))
-  ActiveComponent::Base.def_component_helper(sub_class)
-  
-  sub_class.class_eval do
-    
-    def initialize(*args, &block)
-      args.push({:tag_type => self.class.to_s.underscore.to_sym})
-      super *args, &block
-    end
-    
-  end
-end

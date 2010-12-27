@@ -32,18 +32,6 @@ class Section < ActiveComponent::Base
     end
   end
 
+  def_html_sub_components ActiveComponent::SECTION_ELEMENTS, self
 end
 
-for elem in ActiveComponent::SECTION_ELEMENTS
-  sub_class = Object.const_set(elem.to_s.camelize, Class.new(Section))
-  ActiveComponent::Base.def_component_helper(sub_class)
-
-  sub_class.class_eval do
-
-    def initialize(*args, &block)
-      args << {:tag_type => self.class.to_s.underscore.to_sym}
-      super *args, &block
-    end
-
-  end
-end

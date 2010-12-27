@@ -1,11 +1,11 @@
-require 'forwardable'
+#require 'forwardable'
 
 module ActiveComponent
   class Base
     include ActiveComponent
     include Haml::Helpers
     include Enumerable
-    extend ::Forwardable
+    #extend ::Forwardable
 
     attr_accessor :attributes, :title
 
@@ -119,18 +119,27 @@ module ActiveComponent
       end
     end
 
-    # def self.components
-    #   # Strings allow for fastest lookup in method_missing (costly)
-    #   subclasses.join(";")
-    # end
+    # This helper creates HTML wrapper components that become sub classes of the given super_class (e.g. Section)
+    def self.def_html_sub_components(names, super_class)
+      for name in names
+        # Creating an anonymous subclass and set according constant
+        new_component = Object.const_set(name.to_s.camelize, Class.new(super_class))
+        # Register component instantiation helper manually with the class constant
+        def_component_helper(new_component)
 
-    # def method_missing(method, *args, &block)
-    #   if components.index method.to_s.camelize
-    #     method.to_class_constant.new(*args, &block)
-    #   else
-    #     super
-    #   end
-    # end
+        new_component.class_eval do
+          # FIXME: Remove eval wrap as soon as Ruby 1.9.2 support can be dropped
+          # Problem: "super from singleton method that is defined to multiple classes is not supported; this will be fixed in 1.9.3 or later"
+          # See https://gist.github.com/455547
+          eval %(
+            def initialize(*args, &block)
+              args << {:tag_type => self.class.to_s.underscore.to_sym}
+              super *args, &block
+            end
+          )
+        end
+      end
+    end
 
     #----------------------------------------
     # NODE METHODS COPIED FROM Tree::TreeNode
@@ -900,12 +909,10 @@ module ActiveComponent
 
     protected :parent=, :setAsRoot!, :createDumpRep
 
-
     protected
-
-    def buffer
-      @haml_buffer.buffer
-    end
+      def buffer
+        @haml_buffer.buffer
+      end
 
   end
 end

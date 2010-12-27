@@ -18,18 +18,5 @@ class InlineTag < ActiveComponent::Base
     wrap_contents(@tag_type, content, nil, @attributes)
   end
   
-end
-
-for elem in ActiveComponent::PHRASING_ELEMENTS
-  sub_class = Object.const_set(elem.to_s.camelize, Class.new(InlineTag))
-  ActiveComponent::Base.def_component_helper(sub_class)
-  
-  sub_class.class_eval do
-    
-    def initialize(*args, &block)
-      args << {:tag_type => self.class.to_s.underscore.to_sym}
-      super *args, &block
-    end
-    
-  end
+  def_html_sub_components ActiveComponent::PHRASING_ELEMENTS, self
 end

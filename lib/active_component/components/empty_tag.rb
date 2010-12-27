@@ -20,18 +20,5 @@ class EmptyTag < ActiveComponent::Base
     "<#{name}#{attrs} />"
   end
   
-end
-
-for elem in ActiveComponent::EMPTY_ELEMENTS
-  sub_class = Object.const_set(elem.to_s.camelize, Class.new(EmptyTag))
-  ActiveComponent::Base.def_component_helper(sub_class)
-  
-  sub_class.class_eval do
-    
-    def initialize(*args)
-      args << {:tag_type => self.class.to_s.underscore.to_sym}
-      super *args
-    end
-    
-  end
+  def_html_sub_components ActiveComponent::EMPTY_ELEMENTS, self
 end

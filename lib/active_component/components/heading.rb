@@ -53,22 +53,6 @@ class Heading < ActiveComponent::Base
       Heading.has_parent_heading?(node.parent)
     )
   end
-  
-end
 
-
-for elem in ActiveComponent::HEADING_ELEMENTS
-  # Creating an anonymous Heading subclass and set according constant
-  sub_class = Object.const_set(elem.to_s.camelize, Class.new(Heading))
-  # Register component instantiation helper manually with the class constant
-  ActiveComponent::Base.def_component_helper(sub_class)
-  
-  sub_class.class_eval do
-    
-    def initialize(*args, &block)
-      args << {:level => self.class.to_s.last.to_i}
-      super *args, &block
-    end
-    
-  end
+  def_html_sub_components ActiveComponent::HEADING_ELEMENTS, self
 end
