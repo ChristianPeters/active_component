@@ -135,7 +135,7 @@ describe ActiveComponent::Base do
   context "instantiation helpers" do
     it "should be available after creating a component" do
       class NewGreetingBox < ActiveComponent::Base; end
-      ActiveComponent.instance_methods.should be_include('new_greeting_box')
+      ActiveComponent.instance_methods.map(&:to_sym).should be_include(:new_greeting_box)
     end
 
     # TODO: How to test this?
