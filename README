@@ -1,5 +1,5 @@
-ActiveComponent
-===============
+Active Component
+================
 
 Active Component introduces components into your Rails presentation layer.
 The use of components improves consistency and development speed through reuse and a new way of view code organization.
@@ -62,4 +62,4 @@ Each method represents a component.
 </div>
 
 
-Copyright (c) 2010 [name of plugin creator], released under the MIT license
+Copyright (c) 2010 Christian Peters, released under the MIT license
