@@ -12,8 +12,8 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "active_component"
-  gem.homepage = "http://github.com/ChristianPeters/active_component"
+  gem.name = "activecomponent"
+  gem.homepage = "http://github.com/ChristianPeters/activecomponent"
   gem.license = "MIT"
   gem.summary = "Build your views by assembling self-rendering components"
   gem.description = %Q{Active Component introduces components into your Rails presentation layer.
@@ -24,7 +24,7 @@ Active Component provides several means that make it easy to write and use compo
   gem.authors = ["Christian Peters"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  gem.add_runtime_dependency 'haml'
+  gem.add_dependency 'haml'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
