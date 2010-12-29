@@ -92,7 +92,7 @@ end
 
 module Haml::Helpers
   alias :print_tags :capture_haml
-  alias :capture :capture_haml
+  alias :print_buffer :capture_haml
   alias :tag :haml_tag
   alias :init_buffer :init_haml_helpers
   alias :concat :haml_concat

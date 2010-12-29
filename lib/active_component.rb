@@ -114,7 +114,7 @@ module ActiveComponent
   #   @param text [#to_s] The text within the tag
   def print_tag(name, *rest)
     puts "warning: print_tag does not except blocks. Use print_tags { tag(:ul) { tag(:li, content) } } instead" if block_given?
-    capture { tag(name, *rest) }
+    print_buffer { tag(name, *rest) }
   end
   
   # Prints a single object, optionally using a method
@@ -130,7 +130,7 @@ module ActiveComponent
         # Haml buffers may be provided in callable form, but have to be captured
         rescue Haml::Error
           # Rescue is only successful if buffer available in current scope
-          capture { object.call }
+          print_buffer { object.call }
         end
       else
         object.to_s   # Each object responds to :to_s
