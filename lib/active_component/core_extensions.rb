@@ -95,6 +95,6 @@ module Haml::Helpers
   alias :print_buffer :capture_haml
   alias :tag :haml_tag
   alias :init_buffer :init_haml_helpers
-  alias :concat :haml_concat
+  alias :write_to_buffer :haml_concat
   alias :string :haml_concat
 end

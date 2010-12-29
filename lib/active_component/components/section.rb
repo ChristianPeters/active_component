@@ -19,14 +19,14 @@ class Section < ActiveComponent::Base
       children.nil? ? (self << @heading) : self.prepend(@heading)
     end
 
-    # TODO: Is this clean? Is there a better way than using concat?
+    # TODO: Is this clean? Is there a better way that hides buffer operations?
     # wrap_contents(@tag_type, :attributes => @attributes, :content => [@heading, content]
 
     print_tags do
       tag @tag_type, @attributes do
-        concat print_object(@heading)
+        write_to_buffer print_object(@heading)
         content.transmogrify do |content|
-          concat print_object(content)
+          write_to_buffer print_object(content)
         end
       end
     end

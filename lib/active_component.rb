@@ -47,7 +47,7 @@ module ActiveComponent
         content_or_contents.transmogrify do |content|
           if flags.include? :wrap_whole_content
             # Write printed object to buffer (without tag)
-            concat print_object(content)
+            write_to_buffer print_object(content)
           else
             # Wrap printed object with a tag and write result to buffer
             tag(tag, print_object(content), attributes)
@@ -60,7 +60,7 @@ module ActiveComponent
             method_or_methods.transmogrify do |method|
               if flags.include? :wrap_whole_content
                 # Write printed object to buffer (without tag)
-                concat print_object(content, method)
+                write_to_buffer print_object(content, method)
               else
                 # Wrap printed object with a tag and write result to buffer
                 tag(tag, print_object(content, method), attributes)
@@ -73,7 +73,7 @@ module ActiveComponent
             method = method_or_methods[index]
             if flags.include? :wrap_whole_content
               # Write printed object to buffer (without tag)
-              concat print_object(content, method)
+              write_to_buffer print_object(content, method)
             else
               # Wrap printed objects with a tag and write result to buffer
               tag(tag, print_object(content, method), attributes)
