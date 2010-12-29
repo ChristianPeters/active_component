@@ -22,19 +22,19 @@ class Table < ActiveComponent::Base
   
   def to_html
     print_tags do
-      tag :table, @attributes do
+      tag_to_buffer :table, @attributes do
         row_count = 0
         unless @headers.blank?
-          tag :tr, get_row_attrs(row_count) do
+          tag_to_buffer :tr, get_row_attrs(row_count) do
             @headers.each_with_index do |header, i|
-              tag :th, header, get_header_attrs(i)
+              tag_to_buffer :th, header, get_header_attrs(i)
             end
             row_count = 1
           end
         end
         content.each_with_index do |row, i|
           unless row.blank?
-            tag :tr, get_row_attrs(row_count + i) do
+            tag_to_buffer :tr, get_row_attrs(row_count + i) do
               print_contents(:td, row, @cols, @field_attrs)
             end
           end

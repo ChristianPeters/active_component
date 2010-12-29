@@ -32,10 +32,10 @@ describe Block do
           Block.new(@title, :tag_type => :h1),
           Block.new("It is better to be quotable than to be honest.", :tag_type => :p),
           Block.new("Details", :tag_type => :aside) do
-            print_tags do
-              tag :dl do
-                tag :dt, "Author"
-                tag :dd, "Tom Stoppard"
+            print_buffer do
+              tag_to_buffer :dl do
+                tag_to_buffer :dt, "Author"
+                tag_to_buffer :dd, "Tom Stoppard"
               end
             end
           end

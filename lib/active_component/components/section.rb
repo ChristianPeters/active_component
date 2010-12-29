@@ -23,7 +23,7 @@ class Section < ActiveComponent::Base
     # wrap_contents(@tag_type, :attributes => @attributes, :content => [@heading, content]
 
     print_tags do
-      tag @tag_type, @attributes do
+      tag_to_buffer @tag_type, @attributes do
         write_to_buffer print_object(@heading)
         content.transmogrify do |content|
           write_to_buffer print_object(content)

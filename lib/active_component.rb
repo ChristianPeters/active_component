@@ -50,7 +50,7 @@ module ActiveComponent
             write_to_buffer print_object(content)
           else
             # Wrap printed object with a tag and write result to buffer
-            tag(tag, print_object(content), attributes)
+            tag_to_buffer(tag, print_object(content), attributes)
           end
         end
       else
@@ -63,7 +63,7 @@ module ActiveComponent
                 write_to_buffer print_object(content, method)
               else
                 # Wrap printed object with a tag and write result to buffer
-                tag(tag, print_object(content, method), attributes)
+                tag_to_buffer(tag, print_object(content, method), attributes)
               end
             end
           end
@@ -76,7 +76,7 @@ module ActiveComponent
               write_to_buffer print_object(content, method)
             else
               # Wrap printed objects with a tag and write result to buffer
-              tag(tag, print_object(content, method), attributes)
+              tag_to_buffer(tag, print_object(content, method), attributes)
             end
           end
         end
@@ -85,7 +85,7 @@ module ActiveComponent
     
     if flags.include? :wrap_whole_content
       # Wrap output of printing procedure with tag and write result to buffer
-      tag(tag, attributes, &printing_procedure)
+      tag_to_buffer(tag, attributes, &printing_procedure)
     else
       # Call printing procedure and write result to buffer
       printing_procedure.call
