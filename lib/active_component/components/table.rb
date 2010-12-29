@@ -21,7 +21,7 @@ class Table < ActiveComponent::Base
   end
   
   def to_html
-    print_tags do
+    print_buffer do
       tag_to_buffer :table, @attributes do
         row_count = 0
         unless @headers.blank?

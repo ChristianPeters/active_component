@@ -103,8 +103,8 @@ module ActiveComponent
   # Wraps haml_tag and directly captures the output buffer product.
   # This should only be used if a single +haml_tag+ should be captured.
   # Note that capturing buffer content should be done as rare as possible for performance reasons.
-  # For non-trivial content you might want to use `print_tags { tag(:ul) { tag(:li, content) } }` instead.
-  #
+  # For non-trivial content you might want to use `print_buffer { tag_to_buffer(:ul) { tag_to_buffer(:li, content) } }` instead.
+  # 
   # @param name [#to_s] The name of the tag
   # @param flags [Array<Symbol>] Haml end-of-tag flags
   # @param attributes [Hash] Hash of Haml (HTML) attributes
@@ -113,7 +113,7 @@ module ActiveComponent
   # @overload print_tag(name, text, *flags, attributes = {})
   #   @param text [#to_s] The text within the tag
   def print_tag(name, *rest)
-    puts "warning: print_tag does not except blocks. Use print_tags { tag(:ul) { tag(:li, content) } } instead" if block_given?
+    puts "warning: print_tag does not except blocks. Use print_buffer { tag_to_buffer(:ul) { tag_to_buffer(:li, content) } } instead" if block_given?
     print_buffer { tag(name, *rest) }
   end
   

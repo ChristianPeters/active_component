@@ -22,7 +22,7 @@ class Section < ActiveComponent::Base
     # TODO: Is this clean? Is there a better way that hides buffer operations?
     # wrap_contents(@tag_type, :attributes => @attributes, :content => [@heading, content]
 
-    print_tags do
+    print_buffer do
       tag_to_buffer @tag_type, @attributes do
         write_to_buffer print_object(@heading)
         content.transmogrify do |content|
