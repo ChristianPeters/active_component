@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{activecomponent}
-  s.version = "0.1.0"
+  s.name = %q{active_component}
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christian Peters"]
-  s.date = %q{2010-12-28}
+  s.date = %q{2010-12-30}
   s.description = %q{Active Component introduces components into your Rails presentation layer.
 The use of components improves consistency and development speed through reuse and a new way of view code organization.
 Components are plain Ruby classes that are able to render themselves using a to_html method.
@@ -28,6 +28,7 @@ Active Component provides several means that make it easy to write and use compo
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "init.rb",
     "lib/active_component.rb",
     "lib/active_component/base.rb",
     "lib/active_component/components/block.rb",
