@@ -1,4 +1,15 @@
 module ActiveComponent
+
+  if defined? Rails::Railtie
+    class Railtie < Rails::Railtie
+      initializer "active_component.load_config" do
+        require 'active_component/config'
+      end
+      initializer "active_component.template_handler_registration" do
+        ActionView::Template.register_template_handler :act, TemplateHandler
+      end
+    end
+  end
   
   HTML5_ELEMENTS = {
     :meta             => [:base, :command, :link, :meta, :noscript, :script, :style, :title],
@@ -159,7 +170,7 @@ end
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 
 require 'active_component/core_extensions'
-require 'active_component/config'
+require 'active_component/config' if Rails::VERSION::MAJOR == 2
 require 'active_component/base'
 
 # Load components
@@ -169,3 +180,11 @@ require 'active_component/components/heading'
 require 'active_component/components/inline_tag'
 require 'active_component/components/section'
 require 'active_component/components/table'
+
+# Register Active Component template handler in Rails 2 app
+if defined? ActionView::TemplateHandlers
+  extend ActionView::TemplateHandlers
+
+  require 'active_component/template_handler'
+  register_template_handler :act, ActiveComponent::TemplateHandler
+end
