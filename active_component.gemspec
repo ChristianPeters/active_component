@@ -41,7 +41,7 @@ Active Component provides several means that make it easy to write and use compo
     "lib/active_component/config.rb",
     "lib/active_component/core_extensions.rb",
     "lib/active_component/template_handler.rb",
-    "pkg/active_component-0.1.1.gem",
+    "pkg/active_component-0.1.2.gem",
     "spec/active_component_spec.rb",
     "spec/active_component_spec_helper.rb",
     "spec/base_spec.rb",
