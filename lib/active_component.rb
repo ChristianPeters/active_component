@@ -10,7 +10,7 @@ module ActiveComponent
       end
     end
   end
-  
+
   HTML5_ELEMENTS = {
     :meta             => [:base, :command, :link, :meta, :noscript, :script, :style, :title],
     :flow             => [:a, :abbr, :address, :article, :aside, :audio, :b, :bdo, :blockquote, :br, :button, :canvas, :cite, :code, :command, :datalist, :del, :details, :dfn, :div, :dl, :em, :embed, :fieldset, :figure, :footer, :form, :h1, :h2, :h3, :h4, :h5, :h6, :header, :hgroup, :hr, :i, :iframe, :img, :input, :ins, :kbd, :keygen, :label, :map, :mark, :math, :menu, :meter, :nav, :noscript, :object, :ol, :output, :p, :pre, :progress, :q, :ruby, :samp, :script, :section, :select, :small, :span, :strong, :sub, :sup, :svg, :table, :textarea, :time, :ul, :var, :video, :wbr],
@@ -24,23 +24,23 @@ module ActiveComponent
     :block_candidates => [:section, :nav, :article, :aside, :h1, :h2, :h3, :h4, :h5, :h6, :hgroup, :header, :footer, :address, :p, :pre, :blockquote, :div],
     :uncategorized    => [:col, :colgroup, :dd, :dt, :figcaption, :head, :html, :legend, :li, :optgroup, :option, :param, :rp, :rt, :source, :summary, :tbody, :tfoot, :th, :thead, :tr]
   }
-  
+
   EMPTY_ELEMENTS      = [:area, :base, :br, :col, :command, :embed, :hr, :img, :input, :keygen, :link, :meta, :param, :source, :wbr]
   PHRASING_ELEMENTS   = HTML5_ELEMENTS[:phrasing] - HTML5_ELEMENTS[:interactive] - HTML5_ELEMENTS[:embedded] - EMPTY_ELEMENTS - [:noscript, :time] + [:ins, :del]
   BLOCK_ELEMENTS      = HTML5_ELEMENTS[:block_candidates] - HTML5_ELEMENTS[:sectioning] - HTML5_ELEMENTS[:sectioning_roots] - HTML5_ELEMENTS[:heading] - [:p, :pre] + [:head, :html, :hgroup]
   SECTION_ELEMENTS    = HTML5_ELEMENTS[:sectioning] + HTML5_ELEMENTS[:sectioning_roots] - HTML5_ELEMENTS[:form_associated]
   HEADING_ELEMENTS    = HTML5_ELEMENTS[:heading] - [:hgroup]
-  
+
   # Embed
   # Table
   # List
   # p, pre
   # figure
   # title
-  
+
   class ActiveComponentError < StandardError; end
   class InvalidHtmlError < ActiveComponentError; end
-    
+
   # Generates a collection of tags wrapping content that is optionally printed using method(s)
   def print_contents(tag, content_or_contents, method_or_methods = nil, *flags_and_attributes)
     flags       = []
@@ -49,9 +49,9 @@ module ActiveComponent
     for arg in flags_and_attributes
       arg.is_a?(Hash) ? attributes.merge!(arg) : flags << arg
     end
-  
-    # Create a callable printing procedure for the case 
-    # that its whole output should be wrapped with a tag 
+
+    # Create a callable printing procedure for the case
+    # that its whole output should be wrapped with a tag
     printing_procedure = Proc.new do
       unless method_or_methods.present?
         # Print content(s) without using methods
@@ -93,7 +93,7 @@ module ActiveComponent
         end
       end
     end
-    
+
     if flags.include? :wrap_whole_content
       # Wrap output of printing procedure with tag and write result to buffer
       tag_to_buffer(tag, attributes, &printing_procedure)
@@ -101,21 +101,21 @@ module ActiveComponent
       # Call printing procedure and write result to buffer
       printing_procedure.call
     end
-    
+
     # Return buffer content
     buffer
-  end 
-  
+  end
+
   # Wraps content(s) into a single tag, optionally using a method
   def wrap_contents(tag, content_or_contents, method_or_methods = nil, *flags_and_attributes)
     print_contents(tag, content_or_contents, method_or_methods, :wrap_whole_content, *flags_and_attributes)
   end
-  
+
   # Wraps haml_tag and directly captures the output buffer product.
   # This should only be used if a single +haml_tag+ should be captured.
   # Note that capturing buffer content should be done as rare as possible for performance reasons.
   # For non-trivial content you might want to use `print_buffer { tag_to_buffer(:ul) { tag_to_buffer(:li, content) } }` instead.
-  # 
+  #
   # @param name [#to_s] The name of the tag
   # @param flags [Array<Symbol>] Haml end-of-tag flags
   # @param attributes [Hash] Hash of Haml (HTML) attributes
@@ -127,7 +127,7 @@ module ActiveComponent
     puts "warning: print_tag does not except blocks. Use print_buffer { tag_to_buffer(:ul) { tag_to_buffer(:li, content) } } instead" if block_given?
     print_buffer { tag(name, *rest) }
   end
-  
+
   # Prints a single object, optionally using a method
   def print_object(object, method = nil)
     #logger = RAILS_DEFAULT_LOGGER
@@ -161,7 +161,7 @@ module ActiveComponent
         end
       else
         raise ArgumentError, "Content is not printable. Provide a Proc/Method that can be called with object or a method name that can be invoked on the object. Alternatively, do not provide a method argument so that the object's :to_html, :call, or :to_s method is called. Parameters given: Object: " + object.inspect + " Method: " + method.inspect
-      end 
+      end
     end
   end
 

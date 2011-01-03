@@ -1,10 +1,15 @@
-#require 'forwardable'
 
 module ActiveComponent
   class Base
     include ActiveComponent
     include Haml::Helpers
     include Enumerable
+
+    # Rails XSS protection support
+    require 'active_support/core_ext/string/output_safety'
+    require 'haml/helpers/xss_mods'
+    include Haml::Helpers::XssMods
+    #require 'forwardable'
     #extend ::Forwardable
 
     attr_accessor :attributes, :title
