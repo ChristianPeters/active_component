@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{active_component}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christian Peters"]
-  s.date = %q{2010-12-30}
+  s.date = %q{2011-01-03}
   s.description = %q{Active Component introduces components into your Rails presentation layer.
 The use of components improves consistency and development speed through reuse and a new way of view code organization.
 Components are plain Ruby classes that are able to render themselves using a to_html method.
@@ -28,6 +28,7 @@ Active Component provides several means that make it easy to write and use compo
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "active_component.gemspec",
     "init.rb",
     "lib/active_component.rb",
     "lib/active_component/base.rb",
@@ -40,7 +41,7 @@ Active Component provides several means that make it easy to write and use compo
     "lib/active_component/config.rb",
     "lib/active_component/core_extensions.rb",
     "lib/active_component/template_handler.rb",
-    "rails/init.rb",
+    "pkg/active_component-0.1.1.gem",
     "spec/active_component_spec.rb",
     "spec/active_component_spec_helper.rb",
     "spec/base_spec.rb",
@@ -77,12 +78,14 @@ Active Component provides several means that make it easy to write and use compo
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<activesupport>, [">= 0"])
       s.add_runtime_dependency(%q<haml>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_runtime_dependency(%q<haml>, [">= 0"])
     else
+      s.add_dependency(%q<activesupport>, [">= 0"])
       s.add_dependency(%q<haml>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -90,6 +93,7 @@ Active Component provides several means that make it easy to write and use compo
       s.add_dependency(%q<haml>, [">= 0"])
     end
   else
+    s.add_dependency(%q<activesupport>, [">= 0"])
     s.add_dependency(%q<haml>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.3.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])

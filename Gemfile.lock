@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activesupport (3.0.3)
     diff-lcs (1.1.2)
     git (1.2.5)
     haml (3.0.25)
@@ -22,6 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   bundler (~> 1.0.0)
   haml
   jeweler (~> 1.5.2)
