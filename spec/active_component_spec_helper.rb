@@ -1,6 +1,6 @@
-require 'spec_helper'
+#require 'spec_helper'
 
-require 'haml'
+#require 'haml'
 
 require 'active_component'
 

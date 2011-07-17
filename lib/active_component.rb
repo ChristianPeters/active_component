@@ -1,3 +1,8 @@
+require 'active_support'
+require 'action_view'
+require 'haml'
+require 'haml/helpers/xss_mods'
+
 module ActiveComponent
 
   if defined? Rails::Railtie
@@ -9,6 +14,8 @@ module ActiveComponent
         ActionView::Template.register_template_handler :act, TemplateHandler
       end
     end
+  else
+    require 'active_component/config'
   end
 
   HTML5_ELEMENTS = {
@@ -170,7 +177,6 @@ end
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 
 require 'active_component/core_extensions'
-require 'active_component/config' if Module.const_defined?('Rails') && Rails::VERSION::MAJOR == 2
 require 'active_component/base'
 
 # Load components

@@ -69,7 +69,6 @@ module Enumerable
   
 end
 
-require 'action_view'
 # FIXME: There should be a better way to provide the module to ActionView.
 class ActionView::Base
   include ActiveComponent
@@ -83,7 +82,6 @@ if defined? ActiveSupport::CoreExtensions::Hash::ReverseMerge
   end
 else
   # Rails 3
-  require 'active_support/core_ext/hash/reverse_merge'
   class Hash
     alias :set_defaults :reverse_merge 
     alias :set_defaults! :reverse_merge! 

@@ -1,7 +1,6 @@
 module ActiveComponent
   # The module for all global ActiveComponent configurations
   module Config
-    require 'haml/template'
     extend self
 
     @component_options = {}
