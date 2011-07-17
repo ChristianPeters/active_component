@@ -170,7 +170,7 @@ end
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 
 require 'active_component/core_extensions'
-require 'active_component/config' if Module.const_definded?('Rails') && Rails::VERSION::MAJOR == 2
+require 'active_component/config' if Module.const_defined?('Rails') && Rails::VERSION::MAJOR == 2
 require 'active_component/base'
 
 # Load components
