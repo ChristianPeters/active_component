@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 describe Block do
   include ActiveComponent
   include Haml::Helpers
@@ -30,7 +32,7 @@ describe Block do
       block = Block.new @title, @tag_type, @attributes do
         [
           Block.new(@title, :tag_type => :h1),
-          Block.new("It is better to be quotable than to be honest.", :tag_type => :p),
+          Block.new(@content, :tag_type => :p),
           Block.new("Details", :tag_type => :aside) do
             print_buffer do
               tag_to_buffer :dl do

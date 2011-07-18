@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Object
   
   # Transmogrify yields self to the given block by default

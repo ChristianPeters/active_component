@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Block < ActiveComponent::Base
 
   attr_accessor :tag_type

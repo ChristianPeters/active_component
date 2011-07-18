@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Table < ActiveComponent::Base
 
   attr_accessor :cols, :headers, :row_attrs, :header_attrs, :field_attrs

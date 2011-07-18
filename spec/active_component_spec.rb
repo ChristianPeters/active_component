@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'active_component_spec_helper'
 
 describe ActiveComponent do
@@ -55,9 +57,14 @@ describe ActiveComponent do
   end
 
   describe "wrap_contents" do
-    it "should wrap content with a tag" do
+    it "should wrap text content with a tag" do
       content = "content"
       @comp.print_contents(:span, content, nil, :wrap_whole_content).should == "<span>\n  content\n</span>\n"
+    end
+
+    it "should wrap HTML content with a tag" do
+      content = "<span>\n  content\n</span>\n"
+      @comp.wrap_contents(:p, content).should == "<p>\n  <span>\n    content\n  </span>\n</p>\n"
     end
 
     it "should wrap multiple contents with a tag" do

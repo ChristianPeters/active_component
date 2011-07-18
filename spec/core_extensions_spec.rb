@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 #TODO transmogrify on more than 2 levels
 
 describe Object do

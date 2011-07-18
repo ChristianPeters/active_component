@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 describe Section do
   
   before :each do

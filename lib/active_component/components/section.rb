@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Section < ActiveComponent::Base
 
   attr_accessor :tag_type, :heading, :heading_level, :heading_attrs

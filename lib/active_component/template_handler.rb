@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ActiveComponent
   class TemplateHandler
     include ActionView::TemplateHandlers::Compilable
