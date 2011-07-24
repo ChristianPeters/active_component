@@ -142,9 +142,7 @@ module ActiveComponent
     #logger = RAILS_DEFAULT_LOGGER
     #logger.info "\"print_object speaking. I am about to print Object: " + object.inspect + " Method: " + method.inspect + ". Over.\""
     unless method.present?
-      if object.respond_to? :to_html
-        object.to_html
-      elsif object.respond_to? :call
+      if object.respond_to? :call
         begin
           object.call.to_s
         # Haml buffers may be provided in callable form, but have to be captured

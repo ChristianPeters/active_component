@@ -114,7 +114,8 @@ describe ActiveComponent do
     it "should render components" do
       renderable = mock :component
       html = "<div>\n Component content\n</div"
-      renderable.should_receive(:to_html).at_least(:once).and_return(html)
+      renderable.should_receive(:to_html).any_number_of_times.and_return(html)
+      renderable.should_receive(:to_s).any_number_of_times.and_return(html)
       @comp.print_object(renderable).should == html
     end
 
