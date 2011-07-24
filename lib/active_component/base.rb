@@ -64,7 +64,7 @@ module ActiveComponent
         # Each value is extracted from args_hash, if resp. var_name present, otherwise the next non-hash argument is taken
         send var_name.to_s + "=", (args_hash.delete(var_name) or non_hash_args.shift)
       end
-      
+
       @attributes ||= {}
       # All args in args_hash that have not been used for setting an instance variable become attributes.
       @attributes.set_defaults!(args_hash)
@@ -114,7 +114,15 @@ module ActiveComponent
 
     def self.def_component_helper(component_class)
       raise ArgumentError, "Anonymous classes are not allowed because a name is needed." if component_class.to_s =~ /#/
+
       ActiveComponent.class_eval do
+        # New way of defining methods with a block parameter (1.9 only)
+        # Attention: evaluation context seems to differ!
+        #define_method(component_class.to_s.underscore) do |*args, &block|
+          #component_class.new(*args, &block)
+        #end
+
+        # Old way of defining methods with a block parameter (supported by 1.8)
         eval %(
           def #{component_class.to_s.underscore}(*args, &block)
             #{component_class}.new(*args, &block)
